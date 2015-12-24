@@ -1,4 +1,3 @@
-alias openCLRTabs='gnome-terminal --tab -t "clrFrontEnd" --working-directory="/home/atd/wk/clrFrontEnd" --tab -t "GAE clrFrontEnd" -e "./ubuntu_gae_server_port_5000.sh" --working-directory="/home/atd/wk/clrFrontEnd/bin" --tab -t "vagrant" -e "vagrant up" --working-directory="/home/atd/wk/climaterealty" --tab -t "vagrantLogs" -e "bash" --working-directory="/home/atd/wk/climaterealty" --tab -t "clrDjango" -e "bash" --working-directory="/home/atd/wk/climaterealty" && exit '
 alias q='exit'
 alias re='source ~/.bash_aliases'
 alias al='gvim ~/.bash_aliases'
@@ -68,3 +67,11 @@ createPatchWithName(){
 git diff > ~/Dropbox/patches/$1
 }
 
+oclrTabs(){
+gnome-terminal --tab -t "clrFrontEnd" --working-directory="/home/atd/wk/clrFrontEnd" \
+--tab -t "GAE clrFrontEnd" -e "./ubuntu_gae_server_port_5000.sh"    --working-directory="/home/atd/wk/clrFrontEnd/bin" \
+--tab -t "vus"             -e "bash -c 'vagrant up && vagrant ssh'" --working-directory="/home/atd/wk/climaterealty" \
+--tab -t "clrDjango1"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
+--tab -t "clrDjango2"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty"
+exit
+}
