@@ -20,9 +20,7 @@ alias vhus='vagrant halt && vagrant up && vagrant ssh'
 alias ls='ls -alt'
 alias sshaw='ssh adaptwater.com.au'
 
-findInAll(){
-grep -i -r $1 --include "*"
-}
+findInAll(){ grep -i -r $1 --include "*"; }
 alias fia=findInAll
 
 findInPython(){
@@ -75,3 +73,13 @@ gnome-terminal --tab -t "clrFrontEnd" --working-directory="/home/atd/wk/clrFront
 --tab -t "clrDjango2"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty"
 exit
 }
+
+installSolarized(){
+sudo apt-get install -y wget unzip curl
+cd
+wget http://ethanschoonover.com/solarized/files/solarized.zip
+unzip solarized.zip
+mkdir -p ~/.vim/colors/
+mv solarized/vim-colors-solarized/colors/solarized.vim ~/.vim/colors/
+}
+
