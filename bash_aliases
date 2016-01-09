@@ -19,6 +19,7 @@ alias vs='vagrant ssh'
 alias vhus='vagrant halt && vagrant up && vagrant ssh'
 alias ls='ls -alt'
 alias sshaw='ssh adaptwater.com.au'
+alias useCredentialHelper='git config credential.helper store'
 
 findInAll(){ grep -i -r $1 --include "*"; }
 alias fia=findInAll
