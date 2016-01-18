@@ -20,6 +20,7 @@ alias vhus='vagrant halt && vagrant up && vagrant ssh'
 alias ls='ls -alt'
 alias sshaw='ssh adaptwater.com.au'
 alias useCredentialHelper='git config credential.helper store'
+alias sshhs='ssh hazard.adaptwater.com.au'
 
 findInAll(){ grep -i -r $1 --include "*"; }
 alias fia=findInAll
@@ -67,12 +68,23 @@ git diff > ~/Dropbox/patches/$1
 }
 
 oclrTabs(){
-gnome-terminal --tab -t "clrFrontEnd" --working-directory="/home/atd/wk/clrFrontEnd" \
+gnome-terminal \
+--tab -t "clrFrontEnd"     -e "bash"                                --working-directory="/home/atd/wk/clrFrontEnd" \
 --tab -t "GAE clrFrontEnd" -e "./ubuntu_gae_server_port_5000.sh"    --working-directory="/home/atd/wk/clrFrontEnd/bin" \
 --tab -t "vus"             -e "bash -c 'vagrant up && vagrant ssh'" --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "clrDjango1"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "clrDjango2"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty"
 exit
+}
+
+oawTabs(){
+gnome-terminal \
+--tab -t "vus" -e "bash -c 'vagrant up && vagrant ssh'" --working-directory="/home/atd/wk/Adaptwater" \
+--tab -t "AW1" -e "bash"                                --working-directory="/home/atd/wk/Adaptwater" \
+--tab -t "AW2" -e "bash"                                --working-directory="/home/atd/wk/Adaptwater" \
+--tab -t "SSH" -e "bash -c 'ssh adaptwater.com.au'"     --working-directory="/home/atd/wk/Adaptwater"
+exit
+
 }
 
 installSolarized(){

@@ -72,7 +72,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-PS1="\[\033[01;37m\]\$? \$(if [[ \$? == 0 ]]; then echo \"\[\033[01;32m\]\342\234\223\"; else echo \"\[\033[01;31m\]\342\234\227\"; fi) $(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@'; fi)\[\033[01;34m\] \w \$\[\033[00m\] "
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -120,3 +119,18 @@ fi
 
 export GOPATH=~/gopath
 export PATH=$PATH:~/google_appengine/
+
+
+
+export PS1="\[\033[01;37m\]\$? \$(if [[ \$? == 0 ]]; then echo \"\[\033[01;32m\]\342\234\223\"; else echo \"\[\033[01;31m\]\342\234\227\"; fi) $(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@'; fi)\[\033[01;34m\] \w \$\[\033[00m\] "
+
+export PATH=".:$HOME/bin:$PATH"
+
+export WORKON_HOME="$HOME/.virtualenvs"
+source /home/atd/.local/bin/virtualenvwrapper.sh
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/home/atd/google-cloud-sdk/path.bash.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/home/atd/google-cloud-sdk/completion.bash.inc'
