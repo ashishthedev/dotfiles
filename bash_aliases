@@ -19,6 +19,7 @@ alias vs='vagrant ssh'
 alias vhus='vagrant halt && vagrant up && vagrant ssh'
 alias ls='ls -alt'
 alias sshaw='ssh adaptwater.com.au'
+alias sshes='ssh ashishthedev@elevation.adaptinfrastrucure.com'
 alias useCredentialHelper='git config credential.helper store'
 alias sshhs='ssh hazard.adaptwater.com.au'
 
@@ -73,7 +74,9 @@ gnome-terminal \
 --tab -t "GAE clrFrontEnd" -e "./ubuntu_gae_server_port_5000.sh"    --working-directory="/home/atd/wk/clrFrontEnd/bin" \
 --tab -t "vus"             -e "bash -c 'vagrant up && vagrant ssh'" --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "clrDjango1"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
---tab -t "clrDjango2"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty"
+--tab -t "clrDjango2"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
+--tab -t "SSH"             -e "bash -c 'ssh adaptwater.com.au'"     --working-directory="/home/atd/wk/climaterealty" \
+--tab -t "SSH"             -e "bash -c 'ssh ashishthedev@elevation.adaptinfrastrucure.com'"     --working-directory="/home/atd/wk/elevation" 
 exit
 }
 
