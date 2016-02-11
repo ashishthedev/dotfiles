@@ -76,7 +76,7 @@ gnome-terminal \
 --tab -t "clrDjango1"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "clrDjango2"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "SSH"             -e "bash -c 'ssh adaptwater.com.au'"     --working-directory="/home/atd/wk/climaterealty" \
---tab -t "SSH"             -e "bash -c 'ssh ashishthedev@elevation.adaptinfrastrucure.com'"     --working-directory="/home/atd/wk/elevation" 
+--tab -t "Elevation SSH"             -e "bash -c 'ssh ashishthedev@elevation.adaptinfrastrucure.com'"     --working-directory="/home/atd/wk/elevation" 
 exit
 }
 
