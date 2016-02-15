@@ -18,10 +18,10 @@ alias vu='vagrant up'
 alias vs='vagrant ssh'
 alias vhus='vagrant halt && vagrant up && vagrant ssh'
 alias ls='ls -alt'
-alias sshaw='ssh adaptwater.com.au'
-alias sshes='ssh ashishthedev@elevation.adaptinfrastrucure.com'
+alias sshaw='setTitle ssh-Adaptwater; ssh adaptwater.com.au'
+alias sshes='setTitle ssh-Elevation; ssh ashishthedev@elevation.adaptinfrastructure.com'
+alias sshhs='setTitle ssh-Hazard; ssh hazard.adaptwater.com.au'
 alias useCredentialHelper='git config credential.helper store'
-alias sshhs='ssh hazard.adaptwater.com.au'
 
 findInAll(){ grep -i -r $1 --include "*"; }
 alias fia=findInAll
@@ -30,6 +30,10 @@ findInPython(){
  grep -i -r $1 --include "*.py"
  }
 alias fip=findInPython
+
+setTitle(){
+echo -en "\033]0;$1\a"
+}
 
 findInJS(){
  grep -i -r $1 --include "*.js"
@@ -76,7 +80,7 @@ gnome-terminal \
 --tab -t "clrDjango1"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "clrDjango2"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "SSH"             -e "bash -c 'ssh adaptwater.com.au'"     --working-directory="/home/atd/wk/climaterealty" \
---tab -t "Elevation SSH"             -e "bash -c 'ssh ashishthedev@elevation.adaptinfrastrucure.com'"     --working-directory="/home/atd/wk/elevation" 
+--tab -t "ssh-Elevation"   -e "bash -c 'ssh ashishthedev@elevation.adaptinfrastructure.com'"     --working-directory="/home/atd/wk/elevation" 
 exit
 }
 
@@ -85,7 +89,7 @@ gnome-terminal \
 --tab -t "vus" -e "bash -c 'vagrant up && vagrant ssh'" --working-directory="/home/atd/wk/Adaptwater" \
 --tab -t "AW1" -e "bash"                                --working-directory="/home/atd/wk/Adaptwater" \
 --tab -t "AW2" -e "bash"                                --working-directory="/home/atd/wk/Adaptwater" \
---tab -t "SSH" -e "bash -c 'ssh adaptwater.com.au'"     --working-directory="/home/atd/wk/Adaptwater"
+--tab -t "SSH-Adaptwater" -e "bash -c 'ssh adaptwater.com.au'"     --working-directory="/home/atd/wk/Adaptwater"
 exit
 
 }
