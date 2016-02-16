@@ -22,6 +22,7 @@ alias sshaw='setTitle ssh-Adaptwater; ssh adaptwater.com.au'
 alias sshes='setTitle ssh-Elevation; ssh ashishthedev@elevation.adaptinfrastructure.com'
 alias sshhs='setTitle ssh-Hazard; ssh hazard.adaptwater.com.au'
 alias useCredentialHelper='git config credential.helper store'
+alias eelevation='gvim scp://ashishthedev@elevation.adaptinfrastructure.com//home/ashishthedev/elevation/elevation.py'
 
 findInAll(){ grep -i -r $1 --include "*"; }
 alias fia=findInAll

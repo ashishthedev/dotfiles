@@ -31,8 +31,8 @@ set lazyredraw
 noremap - gT
 noremap <c-space> gt
 noremap <leader>t :Tex<CR>
-noremap <C-s> :w<CR>zz<ESC>
-inoremap <C-s> <Esc>:w<CR>zz<ESC>
+noremap <C-s> :set buftype=" "<ESC>:w<CR>zz<ESC>
+inoremap <C-s> <Esc>:set buftype=" "<ESC> :w<CR>zz<ESC>
 inoremap jk <ESC>
 inoremap <Esc> <nop>
 set cursorcolumn
@@ -108,3 +108,5 @@ function! GoSettings()
         setlocal nolist
 
 endfunction
+
+map ,ele :e scp://ashishthedev@elevation.adaptinfrastructure.com//home/ashishthedev/elevation/elevation.py
