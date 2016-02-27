@@ -19,10 +19,12 @@ alias vs='vagrant ssh'
 alias vhus='vagrant halt && vagrant up && vagrant ssh'
 alias ls='ls -alt'
 alias sshaw='setTitle ssh-Adaptwater; ssh adaptwater.com.au'
-alias sshes='setTitle ssh-Elevation; ssh ashishthedev@elevation.adaptinfrastructure.com'
+alias sshes='setTitle ssh-Elevation; ssh ashishthedev@elevation.adaptinfrastructure.com; ssh-Elevation'
 alias sshhs='setTitle ssh-Hazard; ssh hazard.adaptwater.com.au'
 alias useCredentialHelper='git config credential.helper store'
 alias eelevation='gvim scp://ashishthedev@elevation.adaptinfrastructure.com//home/ashishthedev/elevation/elevation.py'
+alias gcloudDeploy='date && gcloud preview app deploy app.yaml --promote && date'
+alias gcloudDeployNoPromote='date && gcloud preview app deploy app.yaml && date'
 
 findInAll(){ grep -i -r $1 --include "*"; }
 alias fia=findInAll
@@ -73,6 +75,13 @@ createPatchWithName(){
 git diff > ~/Dropbox/patches/$1
 }
 
+otaxbotTabs(){
+gnome-terminal \
+--tab -t "tbFrontEnd"    -e "bash"                                --working-directory="/home/atd/wk/taxbot/" \
+--tab -t "tbGAEServer" -e "./ubuntu_gae_server_port_5000.sh"    --working-directory="/home/atd/wk/taxbot/bin"
+exit
+}
+
 oclrTabs(){
 gnome-terminal \
 --tab -t "clrFrontEnd"     -e "bash"                                --working-directory="/home/atd/wk/clrFrontEnd" \
@@ -81,7 +90,7 @@ gnome-terminal \
 --tab -t "clrDjango1"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "clrDjango2"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "SSH"             -e "bash -c 'ssh adaptwater.com.au'"     --working-directory="/home/atd/wk/climaterealty" \
---tab -t "ssh-Elevation"   -e "bash -c 'ssh ashishthedev@elevation.adaptinfrastructure.com'"     --working-directory="/home/atd/wk/elevation" 
+--tab -t "ssh-Elevation"   -e "bash -c 'ssh ashishthedev@elevation.adaptinfrastructure.com'"     --working-directory="/home/atd/wk/elevation"
 exit
 }
 

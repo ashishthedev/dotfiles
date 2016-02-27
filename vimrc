@@ -2,7 +2,7 @@ set nu
 
 "Maps
 map \\ :q!<CR>
-map <leader>v :e ~/.vimrc<CR>
+map <leader>v :tabedit ~/.vimrc<CR>
 map <space> /
 map ,re :source ~/.vimrc<CR>
 imap <tab> <C-P>
