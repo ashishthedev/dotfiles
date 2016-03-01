@@ -77,8 +77,8 @@ git diff > ~/Dropbox/patches/$1
 
 otaxbotTabs(){
 gnome-terminal \
---tab -t "tbFrontEnd"    -e "bash"                                --working-directory="/home/atd/wk/taxbot/" \
---tab -t "tbGAEServer" -e "./ubuntu_gae_server_port_5000.sh"    --working-directory="/home/atd/wk/taxbot/bin"
+--tab -t "tbGAEServer" -e "./ubuntu_gae_server_port_5000.sh"    --working-directory="/home/atd/wk/taxbot/bin" \
+--tab -t "tbFrontEnd"    -e "bash"                                --working-directory="/home/atd/wk/taxbot/" 
 exit
 }
 
