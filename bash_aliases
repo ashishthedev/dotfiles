@@ -77,8 +77,9 @@ git diff > ~/Dropbox/patches/$1
 
 otaxbotTabs(){
 gnome-terminal \
---tab -t "tbGAEServer" -e "./ubuntu_gae_server_port_5000.sh"    --working-directory="/home/atd/wk/taxbot/bin" \
+--tab -t "tbGAEServer" -e "./ubuntu_gae_server_port_6000.sh"    --working-directory="/home/atd/wk/taxbot/bin" \
 --tab -t "tbFrontEnd"    -e "bash"                                --working-directory="/home/atd/wk/taxbot/" 
+google-chrome http://localhost:6000/
 exit
 }
 
@@ -91,6 +92,7 @@ gnome-terminal \
 --tab -t "clrDjango2"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "SSH"             -e "bash -c 'ssh adaptwater.com.au'"     --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "ssh-Elevation"   -e "bash -c 'ssh ashishthedev@elevation.adaptinfrastructure.com'"     --working-directory="/home/atd/wk/elevation"
+google-chrome http://localhost:5000/
 exit
 }
 
