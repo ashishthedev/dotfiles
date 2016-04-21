@@ -79,9 +79,11 @@ git diff > ~/Dropbox/patches/$1
 
 otaxbotTabs(){
 gnome-terminal \
---tab -t "tbGAEServer" -e "./ubuntu_gae_server_port_6000.sh"    --working-directory="/home/atd/wk/taxbot/bin" \
---tab -t "tbFrontEnd"    -e "bash"                                --working-directory="/home/atd/wk/taxbot/" 
-google-chrome http://localhost:6000/
+--tab -t "tbGAEServer" -e "./ubuntu_gae_server_port.sh"    --working-directory="/home/atd/wk/taxbot/bin" \
+--tab -t "tbFrontEnd"    -e "bash"                         --working-directory="/home/atd/wk/taxbot/" 
+--tab -t "tbFrontEnd2"   -e "bash"                         --working-directory="/home/atd/wk/taxbot/" 
+
+google-chrome http://localhost:5100/
 exit
 }
 
@@ -92,11 +94,14 @@ gnome-terminal \
 --tab -t "vus"             -e "bash -c 'vagrant up && vagrant ssh'" --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "clrDjango1"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "clrDjango2"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
+--tab -t "pdfserver"       -e "bash -c 'export BASH_POST_RC=\"workon pdfserver;python run.py\"; exec bash'"  --working-directory="/home/atd/wk/pdfserver" \
 --tab -t "SSH"             -e "bash -c 'ssh adaptwater.com.au'"     --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "ssh-Elevation"   -e "bash -c 'ssh ashishthedev@elevation.adaptinfrastructure.com'"     --working-directory="/home/atd/wk/elevation"
-google-chrome http://localhost:5000/
+
+google-chrome http://localhost:5005/
 exit
 }
+
 oclrTabs(){
 gnome-terminal \
 --tab -t "clrFrontEnd"     -e "bash"                                --working-directory="/home/atd/wk/clrFrontEnd" \
@@ -104,9 +109,10 @@ gnome-terminal \
 --tab -t "vus"             -e "bash -c 'vagrant up && vagrant ssh'" --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "clrDjango1"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "clrDjango2"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
+--tab -t "pdfserver"       -e "bash"                                --working-directory="/home/atd/wk/pdfserver" \
 --tab -t "SSH"             -e "bash -c 'ssh adaptwater.com.au'"     --working-directory="/home/atd/wk/climaterealty" \
 --tab -t "ssh-Elevation"   -e "bash -c 'ssh ashishthedev@elevation.adaptinfrastructure.com'"     --working-directory="/home/atd/wk/elevation"
-google-chrome http://localhost:5001/
+google-chrome http://localhost:5000/
 exit
 }
 

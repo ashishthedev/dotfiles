@@ -119,6 +119,7 @@ fi
 
 export GOPATH=~/gopath
 export PATH=$PATH:~/google_appengine/
+export PYTHONDONTWRITEBYTECODE=1
 
 
 
@@ -127,10 +128,6 @@ export PS1="\[\033[01;37m\]\$? \$(if [[ \$? == 0 ]]; then echo \"\[\033[01;32m\]
 export PATH=".:$HOME/bin:$PATH"
 
 export WORKON_HOME="$HOME/.virtualenvs"
-source /home/atd/.local/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper.sh
 
-# The next line updates PATH for the Google Cloud SDK.
-source '/home/atd/google-cloud-sdk/path.bash.inc'
-
-# The next line enables shell command completion for gcloud.
-source '/home/atd/google-cloud-sdk/completion.bash.inc'
+eval "$BASH_POST_RC"

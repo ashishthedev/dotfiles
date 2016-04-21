@@ -56,14 +56,27 @@ autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
 
 "Python Settings
-autocmd BufEnter,BufRead,BufWritePost,BufReadPre,BufNewFile *.py call PySettings()
+autocmd BufEnter,BufRead,BufReadPre,BufNewFile *.py call PySettings()
 function! PySettings()
         set expandtab
         set tabstop=4
         set shiftwidth=4
         set list
         set listchars=tab:>-,trail:-
+        echohl WarningMsg | echo "Python settings with 4 tabs" | echohl None
 endfunction
+
+function! Py2Settings()
+        set expandtab
+        set tabstop=2
+        set shiftwidth=2
+        set list
+        set listchars=tab:>-,trail:-
+        echohl WarningMsg | echo "Python settings with 2 tabs" | echohl None
+endfunction
+
+map ,py2 :call Py2Settings()<CR>
+map ,py4 :call PySettings()<CR>
 
 autocmd BufWritePre *.html :normal mzgg=G`z
 
