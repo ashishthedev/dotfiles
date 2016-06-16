@@ -129,5 +129,6 @@ export PATH=".:$HOME/bin:$PATH"
 
 export WORKON_HOME="$HOME/.virtualenvs"
 source /usr/local/bin/virtualenvwrapper.sh
+PROMPT_DIRTRIM=2
 
 eval "$BASH_POST_RC"
