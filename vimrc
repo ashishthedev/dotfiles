@@ -38,7 +38,7 @@ inoremap <Esc> <nop>
 set cursorcolumn
 
 syntax on
-set background=dark
+set background=light
 colorscheme solarized
 set ignorecase
 set cmdheight=1
@@ -52,12 +52,13 @@ set cryptmethod=blowfish
 set expandtab
 "
 "Views
-autocmd BufWinLeave ?* mkview
+autocmd BufWinLeave ?* silent mkview
 autocmd BufWinEnter ?* silent loadview
 
 "Python Settings
 autocmd BufEnter,BufRead,BufReadPre,BufNewFile *.py call PySettings()
 function! PySettings()
+        set syntax=python
         set expandtab
         set tabstop=4
         set shiftwidth=4
@@ -123,10 +124,13 @@ function! GoSettings()
 endfunction
 
 map ,ele :e scp://ashishthedev@elevation.adaptinfrastructure.com//home/ashishthedev/elevation/elevation.py
+map ,e2 :e scp://ashish@staging.adaptwater.com.au//tmp/g.txt
+"map ,e3 :e scp://ashish@adaptwater.com.au//tmp/g.txt<CR>
+map ,e3 :e scp://ashish@adaptwater.com.au//tmp/g.txt<CR>
   
 """""""""""""" Cursor Jazz """""""""""""""""""'
 "To change the cursor in insert mode
-autocmd InsertEnter,InsertLeave ?* set cul!
+autocmd InsertEnter,InsertLeave ?* silent set cul!
 :hi CursorLine cterm=NONE ctermbg=black
 
 if has("autocmd")
@@ -146,4 +150,5 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = { 'passive_filetypes': ['python', 'javascript'] }
 """""""""""""" Syntastic Settings End """""""""""""""""""'

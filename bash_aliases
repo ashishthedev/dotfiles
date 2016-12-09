@@ -28,6 +28,8 @@ alias ssh_pdfserver='setTitle ssh-pdfserver; ssh ashishthedev@elevation.adaptinf
 alias ssh_hazard='setTitle ssh-Hazard; ssh hazard.adaptwater.com.au'
 alias ssh_hazardv2='setTitle ssh-HazardV2; ssh ashishthedev@hazardv2.adaptinfrastructure.com'
 alias ssh_alpha='setTitle ssh-alpha; ssh ashishthedev@alpha.adaptinfrastructure.com'
+alias ssh_clopitron='setTitle ssh-clopitron; ssh ashishthedev@104.199.192.170'
+alias ssh_skylurch='setTitle ssh-skylurch; ssh ashishthedev@104.199.176.155'
 alias useCredentialHelper='git config credential.helper store'
 alias eelevation='gvim scp://ashishthedev@elevation.adaptinfrastructure.com//home/ashishthedev/elevation/elevation.py'
 alias gcloudDeploy='date && gcloud preview app deploy app.yaml --promote && date'
@@ -88,10 +90,10 @@ git diff > ~/Dropbox/patches/$1
 
 oitsTabs(){
 gnome-terminal \
---tab -t "vus1"           -e "bash -c 'vagrant up && vagrant ssh'" --working-directory="/home/atd/wk/itsweb-0002/library/" \
---tab -t "vus2"           -e "bash -c 'vagrant up && vagrant ssh'" --working-directory="/home/atd/wk/itsweb-0002/library/" \
 --tab -t "itsFrontEnd"    -e "bash"                         --working-directory="/home/atd/wk/itsweb-0002/library/" \
---tab -t "itsFrontEnd2"    -e "bash -c 'export BASH_POST_RC=\"gvim libfapp/templates/home.html\"; exec bash'"   --working-directory="/home/atd/wk/itsweb-0002/library/" \
+--tab -t "itsFrontEnd2"   -e "bash -c 'export BASH_POST_RC=\"gvim feapp/model_datastore.py\"; exec bash'"   --working-directory="/home/atd/wk/itsweb-0002/library/" \
+--tab -t "itsFrontEnd3"   -e "bash -c 'export BASH_POST_RC=\"python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check\"; exec bash'"   --working-directory="/home/atd/wk/itsweb-0002/library/ --debug" \
+
 
 google-chrome http://localhost:8080/ &
 exit
@@ -133,7 +135,7 @@ google-chrome http://localhost:5005/
 exit
 }
 
-oclrTabs(){
+oclrPdfTabs(){
 gnome-terminal \
 --tab -t "clrFrontEnd"     -e "bash"                                --working-directory="/home/atd/wk/clrFrontEnd" \
 --tab -t "GAE clrFrontEnd" -e "./ubuntu_gae_server.sh"    --working-directory="/home/atd/wk/clrFrontEnd/app/bin" \
@@ -157,6 +159,22 @@ exit
 
 }
 
+oalphaTabs(){
+gnome-terminal \
+--tab -t "vus" -e "bash -c 'vagrant up && vagrant ssh'" --working-directory="/home/atd/wk/alpha" \
+--tab -t "AW1" -e "bash"                                --working-directory="/home/atd/wk/alpha" \
+--tab -t "AW2" -e "bash"                                --working-directory="/home/atd/wk/alpha" \
+--tab -t "SSH-Alpha" -e "bash -c 'ssh ashishthedev@alpha.adaptinfrastructure.com'"     --working-directory="/home/atd/wk/alpha"
+exit
+
+}
+
+alias runitsserver='python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check --dev_appserver_log_level debug'
+alias runitsserver_checksdk='python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ '
+alias runitsserver_clear='python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check --clear_datastore --clear_search_indexes'
+alias runitsserver2='python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --port 9090 --admin_host 0.0.0.0 --admin_port 9191 --storage_path /tmp/ --skip_sdk_update_check'
+alias goliveits='pushd ~/wk/itsweb-0002/library && appcfg.py update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+
 installSolarized(){
 sudo apt-get install -y wget unzip curl
 cd
@@ -166,3 +184,17 @@ mkdir -p ~/.vim/colors/
 mv solarized/vim-colors-solarized/colors/solarized.vim ~/.vim/colors/
 }
 
+devalpha(){
+tmux new-session -d
+tmux send-keys 'cd ~/wk/alpha/proto4 && vim ajax.py' C-m
+tmux split-window -v
+tmux send-keys 'cd ~/wk/alpha && vagrant up && vagrant ssh' C-m
+tmux split-window -h
+tmux -2 attach-session -d
+
+}
+devalpha2(){
+tmux new-session -d 'vim'
+tmux split-window -h
+tmux -2 attach-session -d 
+}

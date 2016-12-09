@@ -117,15 +117,17 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export GOPATH=~/gopath
-export PATH=$PATH:~/google_appengine/
+export GOPATH=~/wk/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:~/google_appengine/:$GOBIN
 export PYTHONDONTWRITEBYTECODE=1
 
 
 
-export PS1="\[\033[01;37m\]\$? \$(if [[ \$? == 0 ]]; then echo \"\[\033[01;32m\]\342\234\223\"; else echo \"\[\033[01;31m\]\342\234\227\"; fi) $(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@'; fi)\[\033[01;34m\] \w \$\[\033[00m\] "
+export PS1="\[\033[01;37m\]\$? \$(if [[ \$? == 0 ]]; then echo \"\[\033[01;32m\]\342\234\223\"; else echo \"\[\033[01;31m\]\342\234\227\"; fi) $(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@'; fi)\[\033[01;34m\] \w \$\[\033[00m\]"
 
 export PATH=".:$HOME/bin:$PATH"
+export PATH="$PATH:/usr/local/go/bin"
 
 export WORKON_HOME="$HOME/.virtualenvs"
 source /usr/local/bin/virtualenvwrapper.sh
