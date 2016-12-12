@@ -194,3 +194,14 @@ tmux send-keys 'cd ~/wk/alpha/proto4 && vim ajax.py' C-m
 tmux -2 attach-session -d
 
 }
+
+devits(){
+cd ~/wk/itsweb-0002/library
+gvim ~/wk/itsweb-0002/library/feapp/model_datastore.py
+google-chrome http://localhost:8080/ &
+tmux new-session  -s itsweb -d
+tmux rename-window "itsweb on google-app-engine"
+tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
+tmux split-window -p 20 -v
+tmux -2 attach-session -t itsweb -d
+}
