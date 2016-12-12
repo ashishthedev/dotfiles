@@ -185,16 +185,12 @@ mv solarized/vim-colors-solarized/colors/solarized.vim ~/.vim/colors/
 }
 
 devalpha(){
-tmux new-session -d
-tmux send-keys 'cd ~/wk/alpha/proto4 && vim ajax.py' C-m
-tmux split-window -v
+tmux new-session -d -c ~/wk/alpha
 tmux send-keys 'cd ~/wk/alpha && vagrant up && vagrant ssh' C-m
-tmux split-window -h
+tmux split-window -p 20 -v
+tmux send-keys 'cd ~/wk/alpha' C-m
+tmux new-window 
+tmux send-keys 'cd ~/wk/alpha/proto4 && vim ajax.py' C-m
 tmux -2 attach-session -d
 
-}
-devalpha2(){
-tmux new-session -d 'vim'
-tmux split-window -h
-tmux -2 attach-session -d 
 }

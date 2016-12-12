@@ -37,8 +37,14 @@ inoremap jk <ESC>
 inoremap <Esc> <nop>
 set cursorcolumn
 
+if has('gui_running')
+        set background=dark
+else
+        set t_Co=16
+        let g:solarized_termcolors=256
+        set background=dark
+endif
 syntax on
-set background=light
 colorscheme solarized
 set ignorecase
 set cmdheight=1
