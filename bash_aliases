@@ -1,4 +1,11 @@
+alias howtosync="echo 'django-admin.py schemamigration proto4 --auto;  django-admin.py syncdb; django-admin.py migrate'"
 alias beam='gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block'
+alias disabletouchpad2="xinput --set-prop 'FSPPS/2 Sentelic FingerSensingPad' 'Device Enabled' 0"
+alias disabletouchpad="xinput --disable 'ETPS/2 Elantech Touchpad'"
+alias enabletouchpad="xinput --enable 'ETPS/2 Elantech Touchpad'"
+alias enabletouchpad2="xinput --set-prop 'ETPS/2 Elantech Touchpad' 'Device Enabled' 1"
+alias listtouchpad="xinput --list"
+alias clearpyc='find . -name \*.pyc -delete'
 alias q='exit'
 alias re='source ~/.bash_aliases'
 alias al='gvim ~/.bash_aliases'
@@ -43,7 +50,7 @@ findInAll(){ grep -i -r $1 --include "*"; }
 alias fia=findInAll
 
 findInPython(){
- grep -i -r $1 --include "*.py"
+ grep -i -r $1 --include "*.py" --exclude-dir=migrations
  }
 alias fip=findInPython
 
@@ -174,6 +181,7 @@ alias runitsserver_checksdk='python ~/go_appengine/dev_appserver.py ~/wk/itsweb-
 alias runitsserver_clear='python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check --clear_datastore --clear_search_indexes'
 alias runitsserver2='python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --port 9090 --admin_host 0.0.0.0 --admin_port 9191 --storage_path /tmp/ --skip_sdk_update_check'
 alias goliveits='pushd ~/wk/itsweb-0002/library && appcfg.py update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+alias golivemanpack='pushd ~/wk/manpack/app && appcfg.py update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
 
 installSolarized(){
 sudo apt-get install -y wget unzip curl
@@ -186,22 +194,33 @@ mv solarized/vim-colors-solarized/colors/solarized.vim ~/.vim/colors/
 
 devalpha(){
 tmux new-session -d -c ~/wk/alpha
+gvim ~/wk/alpha/proto4/ajax.py
 tmux send-keys 'cd ~/wk/alpha && vagrant up && vagrant ssh' C-m
 tmux split-window -p 20 -v
 tmux send-keys 'cd ~/wk/alpha' C-m
 tmux new-window 
-tmux send-keys 'cd ~/wk/alpha/proto4 && vim ajax.py' C-m
-tmux -2 attach-session -d
+tmux send-keys 'cd ~/wk/alpha/proto4' C-m
+tmux -2 attach-session -d 
 
 }
 
 devits(){
 cd ~/wk/itsweb-0002/library
 gvim ~/wk/itsweb-0002/library/feapp/model_datastore.py
-google-chrome http://localhost:8080/ &
-tmux new-session  -s itsweb -d
+google-chrome http://localhost:8080/ 2>/dev/null &
+tmux new-session -s itsweb -d
 tmux rename-window "itsweb on google-app-engine"
 tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
 tmux split-window -p 20 -v
 tmux -2 attach-session -t itsweb -d
+}
+devmanpack(){
+cd ~/wk/manpack/app
+gvim ~/wk/manpack/app/handlers.go
+google-chrome http://localhost:8080/ 2>/dev/null &
+tmux new-session -s manpack -d
+tmux rename-window "manpack on google-app-engine"
+tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/manpack/app/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
+tmux split-window -p 20 -v
+tmux -2 attach-session -t manpack -d
 }

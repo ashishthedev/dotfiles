@@ -9,7 +9,7 @@ imap <tab> <C-P>
 map j gj
 map k gk
 
-noremap <F2> :%s/<C-R><C-W>/<C-R><C-w>/gc
+noremap <F2> :%s/\<<C-R><C-W>\>/<C-R><C-w>/gc
 inoremap <F4> <C-R>=strftime("%Y-%b-%d %a %I:%M %p")<CR>
 runtime macros/matchit.vim
 
