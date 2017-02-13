@@ -70,6 +70,7 @@ function! PySettings()
         set shiftwidth=4
         set list
         set listchars=tab:>-,trail:-
+        set smartindent
         "echohl WarningMsg | echo "Python settings with 4 tabs" | echohl None
 endfunction
 

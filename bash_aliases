@@ -1,3 +1,5 @@
+alias localip="hostname -I"
+alias localip2="ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'"
 alias howtosync="echo 'django-admin.py schemamigration proto4 --auto;  django-admin.py syncdb; django-admin.py migrate'"
 alias beam='gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block'
 alias disabletouchpad2="xinput --set-prop 'FSPPS/2 Sentelic FingerSensingPad' 'Device Enabled' 0"
@@ -214,6 +216,15 @@ tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/
 tmux split-window -p 20 -v
 tmux -2 attach-session -t itsweb -d
 }
+
+devrpi(){
+cd ~/wk/rpi/
+tmux new-session -s rpi -d
+tmux rename-window "rpi"
+tmux split-window -p 20 -v
+tmux -2 attach-session -t rpi -d
+}
+
 devmanpack(){
 cd ~/wk/manpack/app
 gvim ~/wk/manpack/app/handlers.go
@@ -224,3 +235,30 @@ tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/manpack/app/app.yaml
 tmux split-window -p 20 -v
 tmux -2 attach-session -t manpack -d
 }
+
+devsettlecash(){
+cd ~/wk/settlecash/app
+gvim ~/wk/settlecash/app/handlers.go
+google-chrome http://localhost:8080/ 2>/dev/null &
+tmux new-session -s settlecash -d
+tmux rename-window "settlecash on google-app-engine"
+tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/settlecash/app/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
+tmux split-window -p 20 -v
+tmux -2 attach-session -t settlecash -d
+alias golivesettlecash='pushd ~/wk/settlecash/app && appcfg.py update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+
+}
+
+devsoftwareforcolleges(){
+cd ~/wk/softwareforcolleges/app
+gvim ~/wk/softwareforcolleges/app/handlers.go
+google-chrome http://localhost:8080/ 2>/dev/null &
+tmux new-session -s softwareforcolleges -d
+tmux rename-window "softwareforcolleges on google-app-engine"
+tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/softwareforcolleges/app/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
+tmux split-window -p 20 -v
+tmux -2 attach-session -t softwareforcolleges -d
+alias golivesoftwareforcolleges='pushd ~/wk/softwareforcolleges/app && appcfg.py update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+
+}
+alias golivesoftwareforcolleges='pushd ~/wk/softwareforcolleges/app && appcfg.py update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
