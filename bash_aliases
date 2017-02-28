@@ -182,7 +182,6 @@ alias runitsserver='python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/libr
 alias runitsserver_checksdk='python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ '
 alias runitsserver_clear='python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check --clear_datastore --clear_search_indexes'
 alias runitsserver2='python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --port 9090 --admin_host 0.0.0.0 --admin_port 9191 --storage_path /tmp/ --skip_sdk_update_check'
-alias goliveits='pushd ~/wk/itsweb-0002/library && appcfg.py update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
 alias golivemanpack='pushd ~/wk/manpack/app && appcfg.py update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
 
 installSolarized(){
@@ -207,15 +206,28 @@ tmux -2 attach-session -d
 }
 
 devits(){
+cd ~/wk/itsweb-007/library
+gvim ~/wk/itsweb-007/library/feapp/model_datastore.py
+google-chrome http://localhost:8080/ 2>/dev/null &
+tmux new-session -s itsweb -d
+tmux rename-window "itsweb-007 on google-app-engine"
+tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/itsweb-007/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
+tmux split-window -p 20 -v
+tmux -2 attach-session -t itsweb -d
+}
+alias goliveits='pushd ~/wk/itsweb-007/library && appcfg.py -A itsweb-007 update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+
+devits2(){
 cd ~/wk/itsweb-0002/library
 gvim ~/wk/itsweb-0002/library/feapp/model_datastore.py
 google-chrome http://localhost:8080/ 2>/dev/null &
 tmux new-session -s itsweb -d
-tmux rename-window "itsweb on google-app-engine"
+tmux rename-window "itsweb-0002 on google-app-engine"
 tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/itsweb-0002/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
 tmux split-window -p 20 -v
 tmux -2 attach-session -t itsweb -d
 }
+alias goliveits0002='pushd ~/wk/itsweb-0002/library && appcfg.py -A itsweb-0002 update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
 
 devrpi(){
 cd ~/wk/rpi/
