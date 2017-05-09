@@ -131,6 +131,9 @@ function! GoSettings()
 endfunction
 
 map ,ele :e scp://ashishthedev@elevation.adaptinfrastructure.com//home/ashishthedev/elevation/elevation.py
+map ,api :e scp://ashishthedev@elevation.adaptinfrastructure.com//home/ashishthedev/pdfserver/pdfserver/api.py
+map ,emailer :e scp://ashishthedev@104.198.90.66//home/ashish_the_dev/wk/emailer/app/main/views.py
+map ,sh :e scp://ashishthedev@elevation.adaptinfrastructure.com//home/ashishthedev/pdfserver/bin/livePdf.sh
 map ,e2 :e scp://ashish@staging.adaptwater.com.au//tmp/g.txt
 "map ,e3 :e scp://ashish@adaptwater.com.au//tmp/g.txt<CR>
 map ,e3 :e scp://ashish@adaptwater.com.au//tmp/g.txt<CR>

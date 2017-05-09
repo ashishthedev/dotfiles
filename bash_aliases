@@ -39,6 +39,7 @@ alias ssh_hazardv2='setTitle ssh-HazardV2; ssh ashishthedev@hazardv2.adaptinfras
 alias ssh_alpha='setTitle ssh-alpha; ssh ashishthedev@alpha.adaptinfrastructure.com'
 alias ssh_clopitron='setTitle ssh-clopitron; ssh ashishthedev@104.199.192.170'
 alias ssh_skylurch='setTitle ssh-skylurch; ssh ashishthedev@104.199.176.155'
+alias ssh_jsrfoundry1-28feb2017='setTitle ssh-jsrfoundry1-28feb2017; ssh ashishthedev@104.198.90.66'
 alias useCredentialHelper='git config credential.helper store'
 alias eelevation='gvim scp://ashishthedev@elevation.adaptinfrastructure.com//home/ashishthedev/elevation/elevation.py'
 alias gcloudDeploy='date && gcloud preview app deploy app.yaml --promote && date'
@@ -48,6 +49,7 @@ alias runhq100='for run in {1..100}; do time curl "http://hazard.adaptwater.com.
 alias runhq1000='for run in {1..1000}; do time curl "http://hazard.adaptwater.com.au/query?h=All&coordinates=-33.779983,151.275935"; done'
 alias runhq10K='for run in {1..10000}; do time curl "http://hazard.adaptwater.com.au/query?h=All&coordinates=-33.779983,151.275935"; done'
 
+fiy(){ grep -i -r $1 --include "*.yaml"; }
 findInAll(){ grep -i -r $1 --include "*"; }
 alias fia=findInAll
 
@@ -193,9 +195,73 @@ mkdir -p ~/.vim/colors/
 mv solarized/vim-colors-solarized/colors/solarized.vim ~/.vim/colors/
 }
 
+
+############## FLASKY ###############
+devflasky(){
+
+tmux new-session -d -c ~/wk/flasky
+gvim ~/wk/flasky/app/__init__.py
+google-chrome http://localhost:5000/ 2>/dev/null &
+tmux send-keys 'workon flasky' C-m
+tmux send-keys 'cd ~/wk/flasky' C-m
+tmux send-keys 'python manage.py runserver' C-m
+tmux split-window -p 20 -v
+tmux send-keys 'cd ~/wk/flasky' C-m
+tmux new-window 
+tmux -2 attach-session -d 
+}
+
+############## CLIMATEvALUATION ###############
+devclimatevaluation(){
+
+tmux new-session -d -c ~/wk/climaterealty
+gvim -p ~/wk/clrFrontEnd/testapp/clrfapp/templates/report.html ~/wk/climaterealty/templates/test_climate_valuation_standard_form.html ~/wk/elevation/elevation.py ~/wk/climaterealty/proto4/process_user_form.py ~/wk/climaterealty/proto4/views.py ~/wk/pdfserver/pdfserver/api.py scp://ashishthedev@elevation.adaptinfrastructure.com//home/ashishthedev/pdfserver/pdfserver/api.py
+
+google-chrome http://localhost:5005/ 2>/dev/null &
+google-chrome http://localhost:8181/ 2>/dev/null &
+google-chrome http://localhost:8282/ 2>/dev/null &
+google-chrome http://localhost:9000/proto4/test-climate-valuation-standard-form 2>/dev/null &
+
+tmux send-keys 'cd ~/wk/climaterealty && vagrant up && vagrant ssh -- -R 8181:localhost:8181' C-m
+tmux split-window -p 20 -v 
+tmux send-keys 'cd ~/wk/climaterealty' C-m
+
+tmux new-window -n "local pdfserver"
+tmux send-keys 'cd ~/wk/pdfserver && workon pdfserver && python run.py' C-m
+
+tmux new-window -n "ssh GAE_testapp"
+tmux send-keys 'cd ~/wk/clrFrontEnd/testapp/bin/ && ubuntu_gae_server.sh' C-m
+
+tmux new-window -n "ssh adaptwater"
+tmux send-keys 'ssh adaptwater.com.au' C-m
+
+tmux new-window -n "ssh elevation"
+tmux send-keys 'ssh ashishthedev@elevation.adaptinfrastructure.com' C-m
+
+tmux new-window -n "local elevation"
+tmux send-keys 'cd ~/wk/elevation/ && python elevation.py' C-m
+
+tmux -2 attach-session -d 
+
+#gnome-terminal \
+#--tab -t "clrFrontEnd"     -e "bash -c 'export BASH_POST_RC=\"gvim testapp/clrfapp/templates/report.html\"; exec bash'"   --working-directory="/home/atd/wk/clrFrontEnd" \
+#--tab -t "GAE clrFrontEnd" -e "./ubuntu_gae_server.sh"    --working-directory="/home/atd/wk/clrFrontEnd/testapp/bin" \
+#--tab -t "vus"             -e "bash -c 'vagrant up && vagrant ssh'" --working-directory="/home/atd/wk/climaterealty" \
+#--tab -t "clrDjango1"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
+#--tab -t "clrDjango2"      -e "bash"                                --working-directory="/home/atd/wk/climaterealty" \
+#--tab -t "pdfserver"       -e "bash -c 'export BASH_POST_RC=\"workon pdfserver;python run.py\"; exec bash'"  --working-directory="/home/atd/wk/pdfserver" \
+#--tab -t "SSH"             -e "bash -c 'ssh adaptwater.com.au'"     --working-directory="/home/atd/wk/climaterealty" \
+#--tab -t "ssh-Elevation"   -e "bash -c 'ssh ashishthedev@elevation.adaptinfrastructure.com'"     --working-directory="/home/atd/wk/elevation"
+#
+#google-chrome http://localhost:5005/
+#exit
+}
+
+############## ALPHA ###############
 devalpha(){
 tmux new-session -d -c ~/wk/alpha
 gvim ~/wk/alpha/proto4/ajax.py
+google-chrome http://localhost:9000/ 2>/dev/null &
 tmux send-keys 'cd ~/wk/alpha && vagrant up && vagrant ssh' C-m
 tmux split-window -p 20 -v
 tmux send-keys 'cd ~/wk/alpha' C-m
@@ -205,6 +271,7 @@ tmux -2 attach-session -d
 
 }
 
+############## ITS ###############
 devits(){
 cd ~/wk/itsweb-007/library
 gvim ~/wk/itsweb-007/library/feapp/model_datastore.py
@@ -212,11 +279,56 @@ google-chrome http://localhost:8080/ 2>/dev/null &
 tmux new-session -s itsweb -d
 tmux rename-window "itsweb-007 on google-app-engine"
 tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/itsweb-007/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
-tmux split-window -p 20 -v
+tmux split-window -p 30 -v
 tmux -2 attach-session -t itsweb -d
 }
+
 alias goliveits='pushd ~/wk/itsweb-007/library && appcfg.py -A itsweb-007 update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
 
+############## EMAILER ###############
+devemailer(){
+cd ~/wk/emailer/app
+gvim -p ~/wk/emailer/app/main.py/views
+google-chrome http://localhost:9494/ 2>/dev/null &
+tmux new-session -s emailer9cash -d
+tmux rename-window "emailer"
+tmux send-keys "python localserver" C-m
+tmux split-window -p 30 -v
+tmux -2 attach-session -t emailer -d
+}
+
+############## 99CASH ###############
+dev99cash(){
+cd ~/wk/99cash/app
+gvim -p ~/wk/99cash/app/feapp/main.py ~/wk/99cash/app/feapp/templates/auth/login.html ~/wk/99cash/app/source/scss/main.scss
+google-chrome http://localhost:8081/ 2>/dev/null &
+tmux new-session -s 99cash -d
+tmux rename-window "99cash on google-app-engine"
+#tmux send-keys "gcloud preview app/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
+tmux send-keys "gulp devserver" C-m
+tmux split-window -p 30 -v
+tmux -2 attach-session -t 99cash -d
+}
+
+alias golive99cash='pushd ~/wk/99cash/app && appcfg.py -A cash-99 update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+
+############## TRACKCOURIERIO ###############
+devtrackcourierio(){
+cd ~/wk/trackcourierio/app
+gvim ~/wk/trackcourierio/app/hello.go
+google-chrome http://localhost:8081/ 2>/dev/null &
+tmux new-session -s trackcourierio -d
+tmux rename-window "trackcourierio on google-app-engine"
+#tmux send-keys "gcloud preview app/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
+tmux send-keys "gulp devserver" C-m
+tmux split-window -p 30 -v
+tmux -2 attach-session -t trackcourierio -d
+}
+
+alias golivetrackcourierio='pushd ~/wk/trackcourierio/app && appcfg.py -A trackcourierio update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+alias gotesttrackcourierio='pushd ~/wk/trackcourierio/app && appcfg.py -A trackcourierio update . --email="ashishthedev@gmail.com" --version="test" --noauth_local_webserver $*'
+
+############## ITS OLD ONLY FOR TESTING ###############
 devits2(){
 cd ~/wk/itsweb-0002/library
 gvim ~/wk/itsweb-0002/library/feapp/model_datastore.py
@@ -228,7 +340,9 @@ tmux split-window -p 20 -v
 tmux -2 attach-session -t itsweb -d
 }
 alias goliveits0002='pushd ~/wk/itsweb-0002/library && appcfg.py -A itsweb-0002 update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+alias goliveits007on0002='pushd ~/wk/itsweb-007/library && appcfg.py -A itsweb-0002 update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
 
+############## RASPBERRY PI ###############
 devrpi(){
 cd ~/wk/rpi/
 tmux new-session -s rpi -d
@@ -237,6 +351,7 @@ tmux split-window -p 20 -v
 tmux -2 attach-session -t rpi -d
 }
 
+############## MANPACK ###############
 devmanpack(){
 cd ~/wk/manpack/app
 gvim ~/wk/manpack/app/handlers.go
@@ -248,6 +363,7 @@ tmux split-window -p 20 -v
 tmux -2 attach-session -t manpack -d
 }
 
+############## SETTLE.CASH ###############
 devsettlecash(){
 cd ~/wk/settlecash/app
 gvim ~/wk/settlecash/app/handlers.go
@@ -261,6 +377,7 @@ alias golivesettlecash='pushd ~/wk/settlecash/app && appcfg.py update . --email=
 
 }
 
+############## SOFTWAREFORCOLLEGES ###############
 devsoftwareforcolleges(){
 cd ~/wk/softwareforcolleges/app
 gvim ~/wk/softwareforcolleges/app/handlers.go

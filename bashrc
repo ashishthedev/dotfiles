@@ -134,3 +134,6 @@ source /usr/local/bin/virtualenvwrapper.sh
 PROMPT_DIRTRIM=2
 
 eval "$BASH_POST_RC"
+
+export NVM_DIR="/home/atd/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
