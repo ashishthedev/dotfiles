@@ -53,6 +53,12 @@ fiy(){ grep -i -r $1 --include "*.yaml"; }
 findInAll(){ grep -i -r $1 --include "*"; }
 alias fia=findInAll
 
+fiw(){
+ grep -i -r $1 --include "*.py" --exclude-dir=migrations
+ grep -i -r $1 --include "*.js"
+ grep -i -r $1 --include "*.html"
+grep -i -r $1 --include "*.go"
+}
 findInPython(){
  grep -i -r $1 --include "*.py" --exclude-dir=migrations
  }
@@ -205,7 +211,8 @@ google-chrome http://localhost:5000/ 2>/dev/null &
 tmux send-keys 'workon flasky' C-m
 tmux send-keys 'cd ~/wk/flasky' C-m
 tmux send-keys 'python manage.py runserver' C-m
-tmux split-window -p 20 -v
+tmux rename-window "flasky localserver"
+tmux split-window -p 30 -v
 tmux send-keys 'cd ~/wk/flasky' C-m
 tmux new-window 
 tmux -2 attach-session -d 
@@ -287,21 +294,45 @@ alias goliveits='pushd ~/wk/itsweb-007/library && appcfg.py -A itsweb-007 update
 
 ############## EMAILER ###############
 devemailer(){
-cd ~/wk/emailer/app
-gvim -p ~/wk/emailer/app/main.py/views
+cd ~/wk/emailer
+gvim -p ~/wk/emailer/app/main/views.py
 google-chrome http://localhost:9494/ 2>/dev/null &
-tmux new-session -s emailer9cash -d
+tmux new-session -s emailer -d
 tmux rename-window "emailer"
-tmux send-keys "python localserver" C-m
+tmux send-keys "workon emailer" C-m
+tmux send-keys "python localserver.py" C-m
 tmux split-window -p 30 -v
+tmux new-window 
+tmux send-keys 'ssh ashishthedev@104.198.90.66' C-m
 tmux -2 attach-session -t emailer -d
 }
+
+############## lststock ###############
+devlststock(){
+cd ~/wk/lststock/app
+gvim -p ~/wk/lststock/app/feapp/main.py  ~/wk/lststock/app/feapp/model_datastore.py ~/wk/lststock/app/feapp/templates/view-stock.html
+subl ~/wk/lststock/app/source/scss/main.scss
+# ~/wk/lststock/app/source/scss/main.scss
+google-chrome http://localhost:8686/ 2>/dev/null &
+google-chrome http://localhost:9686/ 2>/dev/null &
+tmux new-session -s lststock -d
+tmux rename-window "lststock on google-app-engine"
+tmux send-keys "gulp devserver" C-m
+tmux split-window -p 30 -v
+tmux -2 attach-session -t lststock -d
+}
+
+alias golivelststock='pushd ~/wk/lststock/app && appcfg.py -A lststock-007 update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+
 
 ############## 99CASH ###############
 dev99cash(){
 cd ~/wk/99cash/app
-gvim -p ~/wk/99cash/app/feapp/main.py ~/wk/99cash/app/feapp/templates/auth/login.html ~/wk/99cash/app/source/scss/main.scss
+gvim -p ~/wk/99cash/app/feapp/main.py  ~/wk/99cash/app/feapp/model_datastore.py ~/wk/99cash/app/feapp/templates/view_statement.html
+subl ~/wk/99cash/app/source/scss/main.scss
+# ~/wk/99cash/app/source/scss/main.scss
 google-chrome http://localhost:8081/ 2>/dev/null &
+google-chrome http://localhost:9091/ 2>/dev/null &
 tmux new-session -s 99cash -d
 tmux rename-window "99cash on google-app-engine"
 #tmux send-keys "gcloud preview app/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
@@ -355,10 +386,11 @@ tmux -2 attach-session -t rpi -d
 devmanpack(){
 cd ~/wk/manpack/app
 gvim ~/wk/manpack/app/handlers.go
-google-chrome http://localhost:8080/ 2>/dev/null &
+google-chrome http://localhost:7070/ 2>/dev/null &
+google-chrome http://localhost:7171/ 2>/dev/null &
 tmux new-session -s manpack -d
 tmux rename-window "manpack on google-app-engine"
-tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/manpack/app/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
+tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/manpack/app/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --port 7070 --admin_host 7171 --storage_path /tmp/manpack/ --skip_sdk_update_check" C-m
 tmux split-window -p 20 -v
 tmux -2 attach-session -t manpack -d
 }
@@ -391,3 +423,24 @@ alias golivesoftwareforcolleges='pushd ~/wk/softwareforcolleges/app && appcfg.py
 
 }
 alias golivesoftwareforcolleges='pushd ~/wk/softwareforcolleges/app && appcfg.py update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+############## PORTS############3
+#5000 - falsky
+#5005 - ? climate realty related something
+#5100 - taxbot.in
+#
+#7070 - manpack
+#7171 - manpack admin
+#8080
+#8081 - 99cash - homehpage
+#8181 - climate realty / evaluation - vagrant
+#8282 - ? climate realty related something
+#8484 - hazardv2
+#
+#
+#9091 - 99cash - admin page
+#
+#9494 - localhost emailer service
+#9696 - nginx live for emailer
+
+#8686 - lststock 
+#9686 - lststock admin

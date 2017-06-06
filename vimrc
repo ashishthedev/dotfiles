@@ -30,6 +30,8 @@ set incsearch
 set lazyredraw
 noremap - gT
 noremap <c-space> gt
+noremap <A-Left>  :tabmove 0<cr>
+noremap <A-Right> :-tabmove<cr>
 noremap <leader>t :Tex<CR>
 noremap <C-s> :set buftype=" "<ESC>:w<CR><ESC>
 inoremap <C-s> <Esc>:set buftype=" "<ESC> :w<CR><ESC>
