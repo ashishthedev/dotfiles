@@ -1,3 +1,6 @@
+alias start_emailer='sudo systemctl start emailer && sudo systemctl status emailer'
+alias stop_emailer='sudo systemctl stop emailer'
+alias gse='cd /etc/nginx/sites-enabled/'
 alias localip="hostname -I"
 alias localip2="ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'"
 alias howtosync="echo 'django-admin.py schemamigration proto4 --auto;  django-admin.py syncdb; django-admin.py migrate'"
@@ -14,7 +17,7 @@ alias al='gvim ~/.bash_aliases'
 alias ..='cd ..'
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias ps="ps auxf"
-alias g='gvim'
+alias g='sudo gvim'
 alias gcam='git commit -am '
 alias woaw='cd ~/wk/Adaptwater'
 alias clrpp='export PYTHONPATH="/home/atd/wk/Adaptwater/"'
@@ -191,7 +194,8 @@ cd
 wget http://ethanschoonover.com/solarized/files/solarized.zip
 unzip solarized.zip
 mkdir -p ~/.vim/colors/
-mv solarized/vim-colors-solarized/colors/solarized.vim ~/.vim/colors/
+#mv solarized/vim-colors-solarized/colors/solarized.vim ~/.vim/colors/
+mv solarized/vim-colors-solarized ~/.vim/bundle/
 }
 
 devalpha(){

@@ -58,8 +58,10 @@ set cryptmethod=blowfish
 set expandtab
 "
 "Views
-autocmd BufWinLeave ?* silent mkview
-autocmd BufWinEnter ?* silent loadview
+"autocmd BufWinLeave * mkview
+"autocmd BufWinEnter * silent loadview
+autocmd BufWinLeave * if expand("%") != "" | mkview | endif
+autocmd BufWinEnter * if expand("%") != "" | loadview | endif
 
 "Python Settings
 autocmd BufEnter,BufRead,BufReadPre,BufNewFile *.py call PySettings()
@@ -137,25 +139,25 @@ map ,e3 :e scp://ashish@adaptwater.com.au//tmp/g.txt<CR>
   
 """""""""""""" Cursor Jazz """""""""""""""""""'
 "To change the cursor in insert mode
-autocmd InsertEnter,InsertLeave ?* silent set cul!
-:hi CursorLine cterm=NONE ctermbg=black
+"autocmd InsertEnter,InsertLeave ?* silent set cul!
+":hi CursorLine cterm=NONE ctermbg=black
 
-if has("autocmd")
-  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-endif
-set guicursor+=n-v-c:blinkon0
+"if has("autocmd")
+"  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+"  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+"  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+"endif
+"set guicursor+=n-v-c:blinkon0
 
 
 """""""""""""" Syntastic Settings """""""""""""""""""'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'passive_filetypes': ['python', 'javascript'] }
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_mode_map = { 'passive_filetypes': ['python', 'javascript'] }
 """""""""""""" Syntastic Settings End """""""""""""""""""'
