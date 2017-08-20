@@ -278,14 +278,32 @@ tmux -2 attach-session -d
 
 }
 
+############### booksapart #######
+devbooksapart(){
+cd ~/wk/booksapart/app
+gvim -p ~/wk/booksapart/app/feapp/main.py  ~/wk/booksapart/app/feapp/templates/home.html
+subl ~/wk/booksapart/app/source/scss/main.scss
+google-chrome http://localhost:8787/ 2>/dev/null &
+google-chrome http://localhost:9797/ 2>/dev/null &
+tmux new-session -s booksapart -d
+tmux rename-window "booksapart on google-app-engine"
+tmux send-keys "gulp devserver" C-m
+tmux split-window -p 30 -v
+tmux -2 attach-session -t booksapart -d
+}
+
+alias golivebooksapart='pushd ~/wk/booksapart/app && appcfg.py -A booksapart-002 update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+alias rollbackbooksapart='pushd ~/wk/booksapart/app && appcfg.py rollback -A booksapart-002 . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+
 ############## ITS ###############
 devits(){
 cd ~/wk/itsweb-007/library
 gvim ~/wk/itsweb-007/library/feapp/model_datastore.py
 google-chrome http://localhost:8080/ 2>/dev/null &
+google-chrome http://localhost:8000/ 2>/dev/null &
 tmux new-session -s itsweb -d
 tmux rename-window "itsweb-007 on google-app-engine"
-tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/itsweb-007/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
+tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/itsweb-007/library/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --admin_port 8000 --storage_path /tmp/ --skip_sdk_update_check" C-m
 tmux split-window -p 30 -v
 tmux -2 attach-session -t itsweb -d
 }
@@ -390,7 +408,7 @@ google-chrome http://localhost:7070/ 2>/dev/null &
 google-chrome http://localhost:7171/ 2>/dev/null &
 tmux new-session -s manpack -d
 tmux rename-window "manpack on google-app-engine"
-tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/manpack/app/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --port 7070 --admin_host 7171 --storage_path /tmp/manpack/ --skip_sdk_update_check" C-m
+tmux send-keys "python ~/go_appengine/dev_appserver.py ~/wk/manpack/app/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --port 7070 --admin_port 7171 --storage_path /tmp/manpack/ --skip_sdk_update_check" C-m
 tmux split-window -p 20 -v
 tmux -2 attach-session -t manpack -d
 }
@@ -430,7 +448,10 @@ alias golivesoftwareforcolleges='pushd ~/wk/softwareforcolleges/app && appcfg.py
 #
 #7070 - manpack
 #7171 - manpack admin
-#8080
+
+#8000 - its admin
+#8080 - its
+
 #8081 - 99cash - homehpage
 #8181 - climate realty / evaluation - vagrant
 #8282 - ? climate realty related something
@@ -444,3 +465,6 @@ alias golivesoftwareforcolleges='pushd ~/wk/softwareforcolleges/app && appcfg.py
 
 #8686 - lststock 
 #9686 - lststock admin
+
+#8787 - booksapart
+#9797 - booksapart admin
