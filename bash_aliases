@@ -278,6 +278,60 @@ tmux -2 attach-session -d
 
 }
 
+############### generatebarcodesdotcom #######
+#Started on 2017-Sep-12 Wed 07:42 AM - Seventh Day (Shrad)
+devgeneratebarcodesdotcom(){
+cd ~/wk/generatebarcodesdotcom/app
+gvim -p ~/wk/generatebarcodesdotcom/app/feapp/main.py  ~/wk/generatebarcodesdotcom/app/feapp/templates/home.html
+subl ~/wk/generatebarcodesdotcom/app/source/scss/main.scss
+google-chrome http://localhost:7676/ 2>/dev/null &
+google-chrome http://localhost:7777/ 2>/dev/null &
+tmux new-session -s generatebarcodesdotcom -d
+tmux rename-window "generatebarcodesdotcom local google-app-engine"
+tmux send-keys "gulp devserver" C-m
+tmux split-window -p 30 -v
+tmux -2 attach-session -t generatebarcodesdotcom -d
+}
+
+alias golivegeneratebarcodes='pushd ~/wk/generatebarcodesdotcom/app && appcfg.py -A generatebarcodesdotcom update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+alias rollbackgeneratebarcodes='pushd ~/wk/generatebarcodesdotcom/app && appcfg.py rollback -A generatebarcodesdotcom . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+
+############### astutecrm #######
+#Started on 2017-Sep-08 Fri 05:52 AM - Third Day (Shrad)
+devastutecrm(){
+cd ~/wk/astutecrm/app
+gvim -p ~/wk/astutecrm/app/feapp/main.py  ~/wk/astutecrm/app/feapp/templates/home.html
+subl ~/wk/astutecrm/app/source/scss/main.scss
+google-chrome http://localhost:7474/ 2>/dev/null &
+google-chrome http://localhost:7575/ 2>/dev/null &
+tmux new-session -s astutecrm -d
+tmux rename-window "astutecrm on local google-app-engine"
+tmux send-keys "gulp devserver" C-m
+tmux split-window -p 30 -v
+tmux -2 attach-session -t astutecrm -d
+}
+
+alias goliveastutecrm='pushd ~/wk/astutecrm/app && appcfg.py -A astutecrm update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+alias rollbackastutecrm='pushd ~/wk/astutecrm/app && appcfg.py rollback -A astutecrm . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+
+############### addresstolatlong #######
+#Started on 2017-Sep-04 Mon 09:42 AM
+devaddresstolatlong(){
+cd ~/wk/addresstolatlngdotcom//app
+gvim -p ~/wk/addresstolatlngdotcom/app/feapp/main.py  ~/wk/addresstolatlngdotcom/app/feapp/templates/home.html
+subl ~/wk/addresstolatlngdotcom/app/source/scss/main.scss
+google-chrome http://localhost:7272/ 2>/dev/null &
+google-chrome http://localhost:7373/ 2>/dev/null &
+tmux new-session -s addresstolatlngdotcom -d
+tmux rename-window "addresstolatlngdotcom on google-app-engine"
+tmux send-keys "gulp devserver" C-m
+tmux split-window -p 30 -v
+tmux -2 attach-session -t addresstolatlngdotcom -d
+}
+
+alias goliveaddresstolatlong='pushd ~/wk/addresstolatlngdotcom/app && appcfg.py -A addresstolatlngdotcom update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+alias rollbackaddresstolatlngdotcom='pushd ~/wk/addresstolatlngdotcom/app && appcfg.py rollback -A addresstolatlngdotcom . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+
 ############### booksapart #######
 devbooksapart(){
 cd ~/wk/booksapart/app
@@ -298,7 +352,7 @@ alias rollbackbooksapart='pushd ~/wk/booksapart/app && appcfg.py rollback -A boo
 ############## ITS ###############
 devits(){
 cd ~/wk/itsweb-007/library
-gvim ~/wk/itsweb-007/library/feapp/model_datastore.py
+gvim ~/wk/itsweb-007/library/feapp/model_datastore.py ~/wk/itsweb-007/library/feapp/app.py ~/wk/itsweb-007/library/feapp/templates/home.html
 google-chrome http://localhost:8080/ 2>/dev/null &
 google-chrome http://localhost:8000/ 2>/dev/null &
 tmux new-session -s itsweb -d
@@ -342,6 +396,23 @@ tmux -2 attach-session -t lststock -d
 
 alias golivelststock='pushd ~/wk/lststock/app && appcfg.py -A lststock-007 update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
 
+
+############## sdatwebsite ###############
+devsdatwebsite(){
+cd ~/wk/sdatwebsite
+gvim -p ~/wk/sdatwebsite/main.py ~/wk/sdatwebsite/templates/customersmap.html
+google-chrome http://localhost:8080/ 2>/dev/null &
+tmux new-session -s sdatwebsite -d
+tmux rename-window "sdatwebsite on google-app-engine locahost"
+tmux send-keys "dev_appserver.py ~/wk/sdatwebsite/app.yaml " C-m
+#tmux send-keys "gcloud preview app/app.yaml --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /tmp/ --skip_sdk_update_check" C-m
+#tmux send-keys "gulp devserver" C-m
+tmux split-window -p 30 -v
+tmux -2 attach-session -t sdatwebsite -d
+}
+
+alias golivesdatwebsite_maynotwork='pushd ~/wk/sdatwebsite && appcfg.py -A sdandarddiesgzb update . --email="ashishthedev@gmail.com" --version="live" --noauth_local_webserver $*'
+alias golivesdatwebsite='pushd ~/wk/sdatwebsite/scripts && python push.py --email="ashishthedev@gmail.com" --version="live" '
 
 ############## 99CASH ###############
 dev99cash(){
@@ -449,6 +520,9 @@ alias golivesoftwareforcolleges='pushd ~/wk/softwareforcolleges/app && appcfg.py
 #7070 - manpack
 #7171 - manpack admin
 
+#7272 - addresstolatlngdotcom 
+#7373 - addresstolatlngdotcom admin
+
 #8000 - its admin
 #8080 - its
 
@@ -468,3 +542,9 @@ alias golivesoftwareforcolleges='pushd ~/wk/softwareforcolleges/app && appcfg.py
 
 #8787 - booksapart
 #9797 - booksapart admin
+
+#7474 - astutecrm
+#7575 - astutecrm admin
+
+#7676 - generatebarcodesdotcom
+#7777 - generatebarcodesdotcom admin

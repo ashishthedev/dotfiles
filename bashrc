@@ -128,6 +128,7 @@ export PS1="\[\033[01;37m\]\$? \$(if [[ \$? == 0 ]]; then echo \"\[\033[01;32m\]
 
 export PATH=".:$HOME/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
+export PATH=$PATH:/home/atd/google_appengine/
 
 export WORKON_HOME="$HOME/.virtualenvs"
 source /usr/local/bin/virtualenvwrapper.sh
