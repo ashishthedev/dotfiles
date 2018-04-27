@@ -130,6 +130,8 @@ export PATH=".:$HOME/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH=$PATH:/home/atd/google_appengine/
 
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 export WORKON_HOME="$HOME/.virtualenvs"
 source /usr/local/bin/virtualenvwrapper.sh
 PROMPT_DIRTRIM=2
@@ -138,3 +140,6 @@ eval "$BASH_POST_RC"
 
 export NVM_DIR="/home/atd/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
+export CLICOLOR=1

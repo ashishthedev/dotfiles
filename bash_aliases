@@ -1,3 +1,5 @@
+
+alias gv="/Applications/MacVim.app/Contents/MacOS/Vim -g"
 alias start_emailer='sudo systemctl start emailer && sudo systemctl status emailer'
 alias stop_emailer='sudo systemctl stop emailer'
 alias gse='cd /etc/nginx/sites-enabled/'
@@ -13,12 +15,13 @@ alias listtouchpad="xinput --list"
 alias clearpyc='find . -name \*.pyc -delete'
 alias q='exit'
 alias re='source ~/.bash_aliases'
-alias al='gvim ~/.bash_aliases'
+alias al='vim ~/.bash_aliases'
 alias ..='cd ..'
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias ps="ps auxf"
 alias g='sudo gvim'
 alias gcam='git commit -am '
+alias gcap='git commit -am "wip" && git push'
 alias woaw='cd ~/wk/Adaptwater'
 alias clrpp='export PYTHONPATH="/home/atd/wk/Adaptwater/"'
 alias woraw='cd ~/wk/real_adaptwater'

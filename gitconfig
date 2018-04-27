@@ -1,0 +1,17 @@
+[color]
+  colorbranch = auto
+  autodiff = auto
+  autostatus = auto
+[color "branch"]
+  branchcurrent = yellow reverse
+  reverselocal = yellow
+  yellowremote = green
+[color "diff"]
+  diffmeta = yellow bold
+  boldfrag = magenta bold
+  boldold = red bold
+  boldnew = green bold
+[color "status"]
+  statusadded = yellow
+  yellowchanged = green
+  greenuntracked = cyan[201~
