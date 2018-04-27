@@ -15,3 +15,6 @@
   statusadded = yellow
   yellowchanged = green
   greenuntracked = cyan[201~
+[user]
+	email = ashishthedev@gmail.com
+	name = Ashish Anand

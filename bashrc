@@ -143,3 +143,5 @@ export NVM_DIR="/home/atd/.nvm"
 
 
 export CLICOLOR=1
+   
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
